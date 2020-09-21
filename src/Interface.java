@@ -6,7 +6,7 @@ public class Interface {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 // On crée une instance de notre fenêtre
-                Window window = new Window();
+                Window window = new Window(10);
                 // On la rend visible
                 window.setVisible(true);
             }
