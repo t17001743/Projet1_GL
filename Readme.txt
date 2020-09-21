@@ -6,3 +6,8 @@ Groupe :
 - CLERC Billy
 - DE JAHAM Charles
 - TAPIN Léah
+
+Le système à développer est le système de contrôle-commande d'un ascenseur.
+
+IDE utilisé : IntelliJ Idea
+Langage de programmation : Java
