@@ -2,14 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 
 // Cette classe est responsable de la création de la fenêtre graphique
-public class Window extends JFrame {
+public class OldWindow extends JFrame {
 
     private int nbOfFloors;
     private JLabel elevatorIndicator;
 
     // Constructeur
     // Demande le nombre d'étages
-    public Window(int nbOfFloors) {
+    public OldWindow(int nbOfFloors) {
         super();
         this.nbOfFloors = nbOfFloors;
 
@@ -134,7 +134,7 @@ public class Window extends JFrame {
 
         // On créer les boutons liés à chaque étages
         for (Integer floor = 0; floor < nbOfFloors; floor++) {
-            JButton button = new JButton(new FloorButton(floor.toString(), this));
+            JButton button = new JButton(new FloorButton(floor.toString()));
             panel.add(button);
         }
 

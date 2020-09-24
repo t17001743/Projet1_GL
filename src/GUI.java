@@ -2,7 +2,8 @@ import javax.swing.*;
 
 public class GUI {
 
-    private static final int nbOfFloors = 10;
+    // Le nombre d'étage dans le bâtiment
+    private static final int nbOfFloors = 20;
 
     public static void main(String[] args) {
         // D'après le tutoriel Swing, c'est plus performant de créer un thread pour chaque fenêtre

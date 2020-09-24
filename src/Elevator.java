@@ -5,7 +5,6 @@ import java.awt.*;
 public class Elevator extends JFrame {
 
     private int nbOfFloors;
-    private JLabel elevatorIndicator;
 
     // Constructeur
     // Demande le nombre d'étages

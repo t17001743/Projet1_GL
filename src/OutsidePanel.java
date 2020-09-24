@@ -5,7 +5,6 @@ import java.awt.*;
 public class OutsidePanel extends JFrame {
 
     private int nbOfFloors;
-    private JLabel elevatorIndicator;
 
     // Constructeur
     // Demande le nombre d'étages
@@ -38,5 +37,19 @@ public class OutsidePanel extends JFrame {
         setResizable(false);
         // On indique à l'application de se fermer lorsqu'on clique sur la croix
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // On intègre le contenu de la fenêtre
+        setContentPane(buildContentPane());
+    }
+
+    /* Panneau bas droit *****************************
+     * Ce panneau affiche l'ensemble des commandes   *
+     * externes à la cabine, ce pour chaque étage    *
+     *************************************************/
+    // Cette méthode construit le contenu de la fenêtre et le renvoi sous la forme d'un JPanel
+    private JPanel buildContentPane() {
+        JPanel panel = new JPanel();
+
+        return panel;
     }
 }
