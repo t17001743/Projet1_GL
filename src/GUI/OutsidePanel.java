@@ -1,5 +1,8 @@
 package GUI;
 
+import Buttons.CallButton;
+import Buttons.FloorButton;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -50,8 +53,41 @@ public class OutsidePanel extends JFrame {
      *************************************************/
     // Cette méthode construit le contenu de la fenêtre et le renvoi sous la forme d'un JPanel
     private JPanel buildContentPane() {
-        JPanel panel = new JPanel();
+        // On créer le panneau global
+        JPanel globalPanel = new JPanel();
+        // On définit sa couleur de fond
+        globalPanel.setBackground(Color.WHITE);
+        // On créer un JPanel qui prend la forme d'un GridBagLayout
+        globalPanel.setLayout(new GridLayout(0, 5));
 
-        return panel;
+        // Pour chaque étage
+        for(Integer floor = 0; floor < nbOfFloors; floor ++) {
+            // On créer un panneau pour les boutons extérieurs
+            JPanel floorPanel = new JPanel();
+            floorPanel.setLayout(new GridLayout(3, 1));
+            floorPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
+            // Numéro d'étage
+            JLabel label = new JLabel(floor.toString(), SwingConstants.CENTER);
+            floorPanel.add(label);
+
+            // Bouton pour monter
+            JButton upButton = new JButton(new CallButton("∧"));
+            upButton.setFont(new Font(upButton.getFont().getName(), Font.BOLD, upButton.getFont().getSize()));
+            upButton.setForeground(Color.WHITE);
+            upButton.setBackground(Color.GRAY);
+            floorPanel.add(upButton);
+
+            // Bouton pour descendre
+            JButton downButton = new JButton(new CallButton(" ∨"));
+            downButton.setFont(new Font(downButton.getFont().getName(), Font.BOLD, downButton.getFont().getSize()));
+            downButton.setForeground(Color.WHITE);
+            downButton.setBackground(Color.GRAY);
+            floorPanel.add(downButton);
+
+            globalPanel.add(floorPanel);
+        }
+
+        return globalPanel;
     }
 }

@@ -1,5 +1,8 @@
 package GUI;
 
+import Buttons.EmergencyButton;
+import Buttons.FloorButton;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,6 +10,7 @@ import java.awt.*;
 public class InsidePanel extends JFrame {
 
     private int nbOfFloors;
+    private JLabel floorNb;
 
     // Constructeur
     // Demande le nombre d'étages
@@ -54,7 +58,6 @@ public class InsidePanel extends JFrame {
         JPanel globalPanel = new JPanel();
         // On définit sa couleur de fond
         globalPanel.setBackground(Color.LIGHT_GRAY);
-
         // On créer un JPanel qui prend la forme d'un GridBagLayout
         globalPanel.setLayout(new GridBagLayout());
         // On créer l'objet qui contiendra les contraintes liés au GridBagLayout
@@ -69,11 +72,11 @@ public class InsidePanel extends JFrame {
         labelPanel.setBackground(Color.BLACK);
         labelPanel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
 
-        JLabel label = new JLabel();
-        label.setFont(new Font(label.getFont().getName(), Font.BOLD, 50));
-        label.setForeground(Color.RED);
-        label.setText("G");
-        labelPanel.add(label);
+        floorNb = new JLabel();
+        floorNb.setFont(new Font(floorNb.getFont().getName(), Font.BOLD, 50));
+        floorNb.setForeground(Color.RED);
+        floorNb.setText("0");
+        labelPanel.add(floorNb);
 
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -96,8 +99,8 @@ public class InsidePanel extends JFrame {
         for (Integer floor = nbOfFloors - 1; floor >= 0 ; floor--) {
 
             // On place le bouton
-            JButton button = new JButton(new FloorButton(floor.toString()));
-            button.setFont(new Font(label.getFont().getName(), Font.BOLD, 25));
+            JButton button = new JButton(new FloorButton(floor.toString(), this));
+            button.setFont(new Font(button.getFont().getName(), Font.BOLD, 25));
             button.setForeground(Color.WHITE);
             button.setBackground(Color.GRAY);
             buttonPanel.add(button);
@@ -106,13 +109,17 @@ public class InsidePanel extends JFrame {
         globalPanel.add(buttonPanel, constraints);
 
         // Bouton d'arrêt d'urgence
-        JButton button = new JButton(new FloorButton("Arret d'urgence"));
-        button.setFont(new Font(label.getFont().getName(), Font.BOLD, 25));
+        JButton button = new JButton(new EmergencyButton("Arret d'urgence"));
+        button.setFont(new Font(floorNb.getFont().getName(), Font.BOLD, 25));
         button.setForeground(Color.WHITE);
         button.setBackground(Color.GRAY);
         constraints.gridy = 3;
         globalPanel.add(button, constraints);
 
         return globalPanel;
+    }
+
+    public void setFloorNb(String floorNb) {
+        this.floorNb.setText(floorNb);
     }
 }

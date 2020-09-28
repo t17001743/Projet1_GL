@@ -1,13 +1,13 @@
-package GUI;
+package Buttons;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class FloorButton extends AbstractAction {
+public class EmergencyButton extends AbstractAction {
 
     String floor;
 
-    public FloorButton(String floor) {
+    public EmergencyButton(String floor) {
         super(floor);
         this.floor = floor;
     }
