@@ -1,4 +1,10 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import GUI.*;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class GUI {
 
