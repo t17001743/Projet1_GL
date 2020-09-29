@@ -2,7 +2,6 @@ package GUI;
 
 import Buttons.EmergencyButton;
 import Buttons.FloorButton;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,12 +10,14 @@ public class InsidePanel extends JFrame {
 
     private int nbOfFloors;
     private JLabel floorNb;
+    private GUI userInterface;
 
     // Constructeur
     // Demande le nombre d'étages
-    public InsidePanel(int nbOfFloors) {
+    public InsidePanel(int nbOfFloors, GUI userInterface) {
         super();
         this.nbOfFloors = nbOfFloors;
+        this.userInterface = userInterface;
 
         build();
     }
@@ -99,7 +100,7 @@ public class InsidePanel extends JFrame {
         for (Integer floor = nbOfFloors - 1; floor >= 0 ; floor--) {
 
             // On place le bouton
-            JButton button = new JButton(new FloorButton(floor.toString(), this));
+            JButton button = new JButton(new FloorButton(floor, userInterface));
             button.setFont(new Font(button.getFont().getName(), Font.BOLD, 25));
             button.setForeground(Color.WHITE);
             button.setBackground(Color.GRAY);

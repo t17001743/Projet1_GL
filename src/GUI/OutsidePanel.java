@@ -10,12 +10,14 @@ import java.awt.*;
 public class OutsidePanel extends JFrame {
 
     private int nbOfFloors;
+    private GUI userInterface;
 
     // Constructeur
     // Demande le nombre d'étages
-    public OutsidePanel(int nbOfFloors) {
+    public OutsidePanel(int nbOfFloors, GUI userInterface) {
         super();
         this.nbOfFloors = nbOfFloors;
+        this.userInterface = userInterface;
 
         build();
     }
@@ -72,14 +74,14 @@ public class OutsidePanel extends JFrame {
             floorPanel.add(label);
 
             // Bouton pour monter
-            JButton upButton = new JButton(new CallButton("∧"));
+            JButton upButton = new JButton(new CallButton("∧", floor, userInterface));
             upButton.setFont(new Font(upButton.getFont().getName(), Font.BOLD, upButton.getFont().getSize()));
             upButton.setForeground(Color.WHITE);
             upButton.setBackground(Color.GRAY);
             floorPanel.add(upButton);
 
             // Bouton pour descendre
-            JButton downButton = new JButton(new CallButton(" ∨"));
+            JButton downButton = new JButton(new CallButton(" ∨", floor, userInterface));
             downButton.setFont(new Font(downButton.getFont().getName(), Font.BOLD, downButton.getFont().getSize()));
             downButton.setForeground(Color.WHITE);
             downButton.setBackground(Color.GRAY);

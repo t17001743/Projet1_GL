@@ -10,13 +10,17 @@ import java.awt.*;
 public class Elevator extends JFrame {
 
     private int nbOfFloors;
-    private JLabel label;
+    private JLabel textInterface;
+    private JPanel graphicalPanel;
+    private JLabel graphicalElevator;
+    private GUI userInterface;
 
     // Constructeur
     // Demande le nombre d'étages
-    public Elevator(int nbOfFloors) {
+    public Elevator(int nbOfFloors, GUI userInterface) {
         super();
         this.nbOfFloors = nbOfFloors;
+        this.userInterface = userInterface;
 
         build();
     }
@@ -71,7 +75,7 @@ public class Elevator extends JFrame {
         constraints.weighty = 0.5;
 
         // On créer des lignes pour l'affichage graphique
-        JPanel graphicalPanel = new JPanel();
+        graphicalPanel = new JPanel();
         graphicalPanel.setLayout(new GridBagLayout());
         graphicalPanel.setBackground(Color.WHITE);
         GridBagConstraints graphicalConstraints = new GridBagConstraints();
@@ -83,33 +87,64 @@ public class Elevator extends JFrame {
         graphicalConstraints.weightx = 0.5;
         graphicalConstraints.weighty = 0.5;
 
-
         // Affichage de tous les étages
         for(Integer floor = nbOfFloors - 1; floor >=0; floor--) {
-            label = new JLabel();
+            JLabel label = new JLabel();
             label.setFont(new Font(label.getFont().getName(), Font.BOLD, 25));
-            label.setText(floor.toString() + "  -------------------------------------");
+            if(floor < 10) {
+                label.setText(floor.toString() + "  ---------------------------------------");
+            }
+            else {
+                label.setText(floor.toString() + "  -------------------------------------");
+            }
             graphicalPanel.add(label, graphicalConstraints);
             graphicalConstraints.gridy++;
         }
+
+        // On dessine l'ascenseur à l'étage 0
+        graphicalConstraints.gridy--;
+        graphicalConstraints.gridx = 1;
+        graphicalElevator = new JLabel();
+        graphicalElevator.setFont(new Font(graphicalElevator.getFont().getName(), Font.BOLD, 25));
+        graphicalElevator.setText("⬛");
+        graphicalPanel.add(graphicalElevator, graphicalConstraints);
 
         globalPanel.add(graphicalPanel, constraints);
 
         // On créer le panneau pour l'affichage textuel
         JPanel labelPanel = new JPanel();
         labelPanel.setLayout(new FlowLayout());
-        labelPanel.setBackground(Color.WHITE);
-        labelPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        labelPanel.setBackground(Color.GRAY);
+        labelPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
 
-        label = new JLabel();
-        label.setFont(new Font(label.getFont().getName(), Font.BOLD, 30));
-        label.setText("L'ascenseur est à l'étage 0");
-        labelPanel.add(label);
+        textInterface = new JLabel();
+        textInterface.setFont(new Font(textInterface.getFont().getName(), Font.BOLD, 30));
+        textInterface.setForeground(Color.WHITE);
+        textInterface.setText("L'ascenseur est à l'étage 0");
+        labelPanel.add(textInterface);
 
         constraints.gridy = 1;
         constraints.gridwidth = 1;
         globalPanel.add(labelPanel, constraints);
 
         return globalPanel;
+    }
+
+    public void updateTextInterface(String string) {
+        textInterface.setText(string);
+    }
+
+    public void updateGraphicalInterface(Integer floor) {
+        graphicalPanel.remove(graphicalElevator);
+
+        GridBagConstraints graphicalConstraints = new GridBagConstraints();
+        graphicalConstraints.fill = GridBagConstraints.BOTH;
+        graphicalConstraints.gridwidth = 1;
+        graphicalConstraints.gridx = 1;
+        graphicalConstraints.gridy = nbOfFloors - floor - 1;
+        graphicalConstraints.weightx = 0.5;
+        graphicalConstraints.weighty = 0.5;
+
+        graphicalPanel.add(graphicalElevator, graphicalConstraints);
     }
 }
