@@ -7,16 +7,21 @@ public class GUI {
     private OutsidePanel outsidePanel;
     private Elevator elevator;
 
-    public void setInsidePanel(InsidePanel insidePanel) {
-        this.insidePanel = insidePanel;
-    }
+    public GUI(int nbOfFloors) {
+        // On crée une instance de notre fenêtre qui représente le panneau intérieur
+        insidePanel = new InsidePanel(nbOfFloors, this);
+        // On la rend visible
+        insidePanel.setVisible(true);
 
-    public void setOutsidePanel(OutsidePanel outsidePanel) {
-        this.outsidePanel = outsidePanel;
-    }
+        // On crée une instance de notre fenêtre qui représente le panneau extérieur
+        outsidePanel = new OutsidePanel(nbOfFloors, this);
+        // On la rend visible
+        outsidePanel.setVisible(true);
 
-    public void setElevator(Elevator elevator) {
-        this.elevator = elevator;
+        // On crée une instance de notre fenêtre qui représente l'ascenseur
+        elevator = new Elevator(nbOfFloors, this);
+        // On la rend visible
+        elevator.setVisible(true);
     }
 
     public InsidePanel getInsidePanel() {
