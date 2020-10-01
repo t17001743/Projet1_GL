@@ -1,9 +1,11 @@
 package OperativeAndControl;
 
+import Buttons.Button;
+
 public class Cabin implements Controller {
 
-    boolean door;
-    int numFloor;
+    private boolean door;
+    private int numFloor;
 
     public Cabin(boolean door, int numFloor){
         this.door = door;
@@ -24,6 +26,11 @@ public class Cabin implements Controller {
 
     public void closeDoors(){ this.door = false; }
 
-    //Il manque la méthode de l'interface
+    public int getNumFloor(){ return numFloor; }
+
+    @Override
+    public void sendPressedButton(Button[] buttons) {
+
+    }
 
 }
