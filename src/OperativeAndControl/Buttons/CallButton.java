@@ -1,34 +1,31 @@
 package OperativeAndControl.Buttons;
 
-public class FloorButton implements Button {
+public class CallButton implements Button {
 
     private boolean light;
     private int numFloor;
 
-    public FloorButton(int numFloor){
-        this.light = false;
+    public CallButton(int numFloor){
+        light = false;
         this.numFloor = numFloor;
     }
 
     @Override
     public void activate() {
-        this.light = true;
+        light = true;
     }
 
     @Override
     public void deactivate() {
-        this.light = false;
+        light = false;
     }
 
     @Override
     public boolean getLight() {
-        return light;
+        return this.light;
     }
 
     @Override
-    public int getFloor() {
-        return numFloor;
-    }
-
+    public int getFloor(){ return numFloor; }
 
 }

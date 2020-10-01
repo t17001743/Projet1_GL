@@ -13,7 +13,7 @@ public class ExternalController implements Controller {
 
 
     @Override
-    public void sendPressedButton(Button[] buttons) {
+    public void sendPressedButtons(Button ... buttons) {
 
     }
 

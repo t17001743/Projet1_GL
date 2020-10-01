@@ -1,10 +1,11 @@
 package OperativeAndControl;
+
 import OperativeAndControl.Buttons.Button;
+import OperativeAndControl.Buttons.CallButton;
 import OperativeAndControl.Buttons.FloorButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import static java.lang.Thread.sleep;
 
@@ -13,21 +14,24 @@ public class Computer {
     Cabin cabin;
     Engine engine;
     boolean emergency;
-    ArrayList<Button> activatedButtons;
-
-    //Map<idButton, idFloor> buttons;
-    Map<Button, Integer> buttons;
+    ArrayList priorityList;
 
     /**
      * Créer la cabine, le moteur et les boutons*/
-    public Computer(int numFloor){
-        cabin = new Cabin(numFloor);
+    public Computer(int nbFloors, int numFloor){
+        cabin = new Cabin(this, nbFloors, numFloor);
         engine = new Engine();
 
-        activatedButtons = new ArrayList<>(); //aucuns boutons cliqués
+        priorityList = new ArrayList(); //étage(s) à desservir
         emergency = false; //aucune urgence
+    }
 
-        makeMapButtons(numFloor);
+    public Computer(int nbFloors){
+        cabin = new Cabin(this, nbFloors);
+        engine = new Engine();
+
+        priorityList = new ArrayList(); //étage(s) à desservir
+        emergency = false; //aucune urgence
     }
 
     public void run(){
@@ -42,6 +46,35 @@ public class Computer {
 
 
         run();
+    }
+
+    public void receivePressedButtons(Button ... buttons){
+
+        for (int i=0; i<buttons.length; i++)
+            treatmentOfButton(buttons[i]);
+    }
+
+    public void treatmentOfButton(Button button){
+
+        if (button.getClass() == new FloorButton(0).getClass())
+            wishingFloor();
+        else if (button.getClass() == new CallButton(0).getClass())
+            callCabin();
+        else emergencyStop();
+    }
+
+    public void wishingFloor(){
+
+    }
+
+    public void callCabin(){
+
+    }
+
+    public void emergencyStop(){
+        emergency = true;
+        engine.stop();
+        priorityList = new ArrayList<>(); //requête précédentes effacées
     }
 
     public void setPositionCabin(){
@@ -62,39 +95,10 @@ public class Computer {
                 cabin.setPosition(position);
                 break;
         }
-
     }
 
-    public void emergencyStop(){
-        emergency = true;
-        activatedButtons = new ArrayList<>();
-    }
 
-    /**Instantie la map des boutons
-     * */
-    public void makeMapButtons(int numFloor){
-        buttons = new HashMap<>();
 
-        //Les boutons du panneau interne
-        for (int i=0; i<numFloor; i++){
-            //Ce serait bien sans le GUI x)
-            FloorButton button = new FloorButton(i, new GUI(numFloor));
-
-            buttons.put(button, button.getFloor());
-        }
-
-        //Les boutons des panneaux externes
-        for (int i=0; i<numFloor; i++){
-
-            //Ce serait bien sans le GUI x)
-            CallButton callButtonUP = new CallButton("UP", i, new GUI(numFloor));
-            CallButton callButtonDOWN = new CallButton("DOWN", i, new GUI(numFloor));
-
-            buttons.put(callButtonUP, callButtonUP.getFloor());
-            buttons.put(callButtonDOWN, callButtonDOWN.getFloor());
-        }
-
-        buttons.put(new EmergencyButton("idk"), -1); //arrêt d'urgence n'est lié à aucun lvl
-    }
+    public double getPositionCabin(){ return cabin.getPosition(); }
 
 }
