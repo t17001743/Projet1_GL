@@ -7,7 +7,7 @@ import java.awt.*;
 public class Elevator extends JFrame {
 
     private int nbOfFloors;
-    private JLabel textInterface;
+    private JTextArea textInterface;
     private JPanel graphicalPanel;
     private JLabel graphicalElevator;
     private GUI userInterface;
@@ -114,10 +114,13 @@ public class Elevator extends JFrame {
         labelPanel.setBackground(Color.GRAY);
         labelPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
 
-        textInterface = new JLabel();
+        textInterface = new JTextArea("L'ascenseur est à l'étage 0", 2, 22);
         textInterface.setFont(new Font(textInterface.getFont().getName(), Font.BOLD, 30));
         textInterface.setForeground(Color.WHITE);
-        textInterface.setText("L'ascenseur est à l'étage 0");
+        textInterface.setLineWrap(true);
+        textInterface.setWrapStyleWord(true);
+        textInterface.setOpaque(false);
+        textInterface.setEditable(false);
         labelPanel.add(textInterface);
 
         constraints.gridy = 1;

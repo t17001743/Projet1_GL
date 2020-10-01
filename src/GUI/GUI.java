@@ -1,6 +1,7 @@
 package GUI;
 
 import OperativeAndControl.Computer;
+import OperativeAndControl.CurrentState;
 
 import static java.lang.Thread.sleep;
 
@@ -33,6 +34,20 @@ public class GUI implements Runnable {
 
     // Le cycle d'exécution de l'interface graphique qui consiste à mettre à jour l'interface graphique
     public void run() {
+        String textInterface = "";
+
+        // On récupère l'état du moteur de l'ascenseur
+        CurrentState engineState = computer.getEngine().getCurrentState();
+        if(engineState == CurrentState.STOP) {
+            textInterface = "L'ascenseur est à l'arrêt";
+        }
+        else if (engineState == CurrentState.UP) {
+            textInterface = "L'ascenseur est entrain de monter";
+        }
+        else {
+            textInterface = "L'ascenseur est entrain de descendre";
+        }
+
         // On récupère la position de la cabine de l'ascenseur
         Double position = computer.getCabin().getPosition();
 
@@ -41,9 +56,33 @@ public class GUI implements Runnable {
             Integer integerPosition = position.intValue();
             String floor = String.valueOf(integerPosition);
             insidePanel.setFloorNb(floor);
-            elevator.updateTextInterface("L'ascenseur est à l'étage " + floor);
+            textInterface += "\nL'ascenseur est à l'étage " + floor;
             elevator.updateGraphicalInterface(integerPosition);
         }
+        else {
+            textInterface += "\nL'ascenseur est entre deux étages";
+        }
+
+        // On regarde si les portes sont ouvertes ou fermées
+        boolean doors = computer.getCabin().getDoors();
+
+        // Si elles sont ouvertes
+        if(doors) {
+            textInterface += "\nLes portes sont ouvertes";
+        }
+        else {
+            textInterface += "\nLes portes sont fermées";
+        }
+
+        // On regarde si un statut d'urgence est activé
+        boolean emergency = computer.getEmergency();
+        if(emergency) {
+            textInterface += "\nETAT URGENCE ACTIF";
+        }
+
+
+        // On met à jour l'interface textuel
+        elevator.updateTextInterface(textInterface);
 
         // On attend une seconde
         try {

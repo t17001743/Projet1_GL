@@ -41,6 +41,8 @@ public class Cabin implements Controller {
 
     public void closeDoors(){ this.door = false; }
 
+    public boolean getDoors() { return door; }
+
     public double getPosition(){ return position; }
 
     public void setPosition(double position){ this.position = position; }

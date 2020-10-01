@@ -50,7 +50,7 @@ public class Computer implements Runnable {
 
             // On attend une seconde
             try {
-                sleep(250);
+                sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -69,7 +69,7 @@ public class Computer implements Runnable {
 
         // On attend une seconde
         try {
-            sleep(250);
+            sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -541,6 +541,11 @@ public class Computer implements Runnable {
         emergency = true;
         engine.stop();
         priorityList = new ArrayList<>(); //requête précédentes effacées
+
+        // On ferme les portes si elles sont ouvertes
+        if(cabin.getDoors()) {
+            cabin.closeDoors();
+        }
     }
 
     // Permet de mettre fin à l'état d'urgence
@@ -570,31 +575,33 @@ public class Computer implements Runnable {
     }
 
     public void checkPriorityList() {
-        // On regarde si on est arrivé au prochain étage à desservir
-        if(priorityList.get(0) == cabin.getPosition()) {
-            // On arrête le moteur
-            engine.stop();
+        // On regarde si on est arrivé au prochain étage à desservir si la liste n'est pas vide
+        if(priorityList.size() > 0) {
+            if (priorityList.get(0) == cabin.getPosition()) {
+                // On arrête le moteur
+                engine.stop();
 
-            // On supprime l'étage de la liste des étages à desservir
-            int floor = priorityList.remove(0);
-            // On indique que l'étage a été desservi
-            cabin.getButtonList().get(floor).deactivate();
-            externalController.getButtonList().get(2 * floor).deactivate();
-            externalController.getButtonList().get(2 * floor + 1).deactivate();
+                // On supprime l'étage de la liste des étages à desservir
+                int floor = priorityList.remove(0);
+                // On indique que l'étage a été desservi
+                cabin.getButtonList().get(floor).deactivate();
+                externalController.getButtonList().get(2 * floor).deactivate();
+                externalController.getButtonList().get(2 * floor + 1).deactivate();
 
-            // On ouvre les portes de la cabine
-            cabin.openDoors();
+                // On ouvre les portes de la cabine
+                cabin.openDoors();
 
-            // On attend une seconde
-            try {
-                sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                // On attend une seconde
+                try {
+                    sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                // On ferme les portes
+                cabin.closeDoors();
+                // On relance le moteur
+
             }
-            // On ferme les portes
-            cabin.closeDoors();
-            // On relance le moteur
-
         }
     }
 
@@ -652,5 +659,9 @@ public class Computer implements Runnable {
     public Cabin getCabin() { return cabin; }
 
     public ExternalController getExternalController() { return externalController; }
+
+    public Engine getEngine() { return engine; }
+
+    public boolean getEmergency() { return emergency; }
 
 }
