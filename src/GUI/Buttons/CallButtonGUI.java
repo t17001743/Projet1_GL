@@ -22,8 +22,17 @@ public class CallButtonGUI extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(direction.equals("∧")) {
+            userInterface.getComputer().getExternalController().getButtonList().get(2 * floor).activate();
+        }
+        else {
+            userInterface.getComputer().getExternalController().getButtonList().get(2 * floor + 1).activate();
+        }
+
+        /*
         userInterface.getInsidePanel().setFloorNb(floor.toString());
         userInterface.getElevator().updateTextInterface("L'ascenseur est à l'étage " + floor.toString());
         userInterface.getElevator().updateGraphicalInterface(floor);
+        */
     }
 }

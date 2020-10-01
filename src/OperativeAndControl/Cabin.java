@@ -11,7 +11,7 @@ public class Cabin implements Controller {
     private boolean door;
     private Computer computer;
     private double position; // si cabine entre les étages
-    private ArrayList<Button> buttonsIntern;
+    private ArrayList<Button> buttonList;
 
     public Cabin(Computer computer, int nbFloors, int numFloor){
         this.computer = computer;
@@ -28,14 +28,13 @@ public class Cabin implements Controller {
     }
 
     public void initialization(int nbFloors){
-        buttonsIntern = new ArrayList<>();
+        buttonList = new ArrayList<>();
 
         for (int i=0; i<nbFloors; i++){
-            FloorButton button = new FloorButton(i);
-            buttonsIntern.add(button);
+            buttonList.add(new FloorButton(i, this));
         }
-        EmergencyButton button = new EmergencyButton();
-        buttonsIntern.add(button); //nbFloors + 1
+
+        buttonList.add(new EmergencyButton(this)); // Index = nbFloor
     }
 
     public void openDoors(){ this.door = true; }
@@ -46,9 +45,16 @@ public class Cabin implements Controller {
 
     public void setPosition(double position){ this.position = position; }
 
+    // Lorsqu'on nous indique qu'un bouton est activé
     @Override
-    public void sendPressedButtons(Button ... buttons) {
-        computer.receivePressedButtons(buttons);
+    public void sendPressedButtons(Button button) {
+        // On le transmet à l'ordinateur
+        computer.receivePressedButton(button);
+    }
+
+    @Override
+    public ArrayList<Button> getButtonList() {
+        return buttonList;
     }
 
 }

@@ -20,8 +20,12 @@ public class FloorButtonGUI extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        userInterface.getComputer().getCabin().getButtonList().get(floor).activate();
+
+        /*
         userInterface.getInsidePanel().setFloorNb(floor.toString());
         userInterface.getElevator().updateTextInterface("L'ascenseur est à l'étage " + floor.toString());
         userInterface.getElevator().updateGraphicalInterface(floor);
+        */
     }
 }

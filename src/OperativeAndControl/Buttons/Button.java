@@ -6,5 +6,5 @@ public interface Button {
     void deactivate();
     boolean getLight();
     int getFloor();
-
+    String getDirection();
 }

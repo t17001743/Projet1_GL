@@ -110,7 +110,7 @@ public class InsidePanel extends JFrame {
         globalPanel.add(buttonPanel, constraints);
 
         // Bouton d'arrêt d'urgence
-        JButton button = new JButton(new EmergencyButtonGUI("Arret d'urgence"));
+        JButton button = new JButton(new EmergencyButtonGUI("Arret d'urgence", nbOfFloors, userInterface));
         button.setFont(new Font(floorNb.getFont().getName(), Font.BOLD, 25));
         button.setForeground(Color.WHITE);
         button.setBackground(Color.GRAY);
