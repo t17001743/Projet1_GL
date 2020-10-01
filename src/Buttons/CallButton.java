@@ -2,7 +2,6 @@ package Buttons;
 
 import GUI.GUI;
 
-import javax.jnlp.IntegrationService;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
