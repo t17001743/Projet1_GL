@@ -6,15 +6,11 @@ public class Cabin implements Controller {
 
     private boolean door;
     private int numFloor;
+    private double position; // si cabine entre les étages
 
     public Cabin(boolean door, int numFloor){
         this.door = door;
         this.numFloor = numFloor;
-    }
-
-    public Cabin(boolean door){
-        this.door = door;
-        numFloor = 0;
     }
 
     public Cabin(int numFloor){
@@ -27,6 +23,10 @@ public class Cabin implements Controller {
     public void closeDoors(){ this.door = false; }
 
     public int getNumFloor(){ return numFloor; }
+
+    public double getPosition(){ return position; }
+
+    public void setPosition(double position){ this.position = position; }
 
     @Override
     public void sendPressedButton(Button[] buttons) {

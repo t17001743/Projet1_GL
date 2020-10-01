@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Thread.sleep;
+
 public class Computer {
 
     Cabin cabin;
@@ -30,6 +32,36 @@ public class Computer {
 
     public void run(){
 
+        setPositionCabin();
+
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        run();
+    }
+
+    public void setPositionCabin(){
+        double position = cabin.getPosition();
+        double speed = engine.getSpeed();
+
+        switch (engine.getCurrentState()){
+
+            case UP:
+                cabin.setPosition(position + speed);
+                break;
+
+            case DOWN:
+                cabin.setPosition(position - speed);
+                break;
+
+            case STOP:
+                cabin.setPosition(0);
+                break;
+        }
     }
 
     public void emergencyStop(){
