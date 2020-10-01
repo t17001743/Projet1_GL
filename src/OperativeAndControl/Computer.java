@@ -5,7 +5,6 @@ import OperativeAndControl.Buttons.CallButton;
 import OperativeAndControl.Buttons.FloorButton;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static java.lang.Thread.sleep;
 
@@ -14,7 +13,7 @@ public class Computer {
     Cabin cabin;
     Engine engine;
     boolean emergency;
-    ArrayList priorityList;
+    ArrayList<Integer> priorityList;
 
     /**
      * Créer la cabine, le moteur et les boutons*/
@@ -57,13 +56,22 @@ public class Computer {
     public void treatmentOfButton(Button button){
 
         if (button.getClass() == new FloorButton(0).getClass())
-            wishingFloor();
+            wishingFloor(button.getFloor());
         else if (button.getClass() == new CallButton(0).getClass())
             callCabin();
         else emergencyStop();
     }
 
-    public void wishingFloor(){
+    public void wishingFloor(int floor){
+
+        if (priorityList.get(0) == null) priorityList.add(floor);
+        else {
+
+
+
+
+        }
+
 
     }
 
