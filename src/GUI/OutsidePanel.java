@@ -1,7 +1,6 @@
 package GUI;
 
-import Buttons.CallButton;
-import Buttons.FloorButton;
+import GUI.Buttons.CallButtonGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -74,14 +73,14 @@ public class OutsidePanel extends JFrame {
             floorPanel.add(label);
 
             // Bouton pour monter
-            JButton upButton = new JButton(new CallButton("∧", floor, userInterface));
+            JButton upButton = new JButton(new CallButtonGUI("∧", floor, userInterface));
             upButton.setFont(new Font(upButton.getFont().getName(), Font.BOLD, upButton.getFont().getSize()));
             upButton.setForeground(Color.WHITE);
             upButton.setBackground(Color.GRAY);
             floorPanel.add(upButton);
 
             // Bouton pour descendre
-            JButton downButton = new JButton(new CallButton(" ∨", floor, userInterface));
+            JButton downButton = new JButton(new CallButtonGUI(" ∨", floor, userInterface));
             downButton.setFont(new Font(downButton.getFont().getName(), Font.BOLD, downButton.getFont().getSize()));
             downButton.setForeground(Color.WHITE);
             downButton.setBackground(Color.GRAY);

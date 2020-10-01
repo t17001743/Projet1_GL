@@ -1,6 +1,6 @@
 package OperativeAndControl;
-import Buttons.*;
-import GUI.GUI;
+import OperativeAndControl.Buttons.Button;
+import OperativeAndControl.Buttons.FloorButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,9 +59,10 @@ public class Computer {
                 break;
 
             case STOP:
-                cabin.setPosition(0);
+                cabin.setPosition(position);
                 break;
         }
+
     }
 
     public void emergencyStop(){

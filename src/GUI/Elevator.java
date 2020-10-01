@@ -1,8 +1,5 @@
 package GUI;
 
-import Buttons.EmergencyButton;
-import Buttons.FloorButton;
-
 import javax.swing.*;
 import java.awt.*;
 

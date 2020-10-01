@@ -1,7 +1,7 @@
 package GUI;
 
-import Buttons.EmergencyButton;
-import Buttons.FloorButton;
+import GUI.Buttons.EmergencyButtonGUI;
+import GUI.Buttons.FloorButtonGUI;
 import javax.swing.*;
 import java.awt.*;
 
@@ -100,7 +100,7 @@ public class InsidePanel extends JFrame {
         for (Integer floor = nbOfFloors - 1; floor >= 0 ; floor--) {
 
             // On place le bouton
-            JButton button = new JButton(new FloorButton(floor, userInterface));
+            JButton button = new JButton(new FloorButtonGUI(floor, userInterface));
             button.setFont(new Font(button.getFont().getName(), Font.BOLD, 25));
             button.setForeground(Color.WHITE);
             button.setBackground(Color.GRAY);
@@ -110,7 +110,7 @@ public class InsidePanel extends JFrame {
         globalPanel.add(buttonPanel, constraints);
 
         // Bouton d'arrêt d'urgence
-        JButton button = new JButton(new EmergencyButton("Arret d'urgence"));
+        JButton button = new JButton(new EmergencyButtonGUI("Arret d'urgence"));
         button.setFont(new Font(floorNb.getFont().getName(), Font.BOLD, 25));
         button.setForeground(Color.WHITE);
         button.setBackground(Color.GRAY);

@@ -1,21 +1,20 @@
-package Buttons;
+package GUI.Buttons;
 
 import GUI.GUI;
-import GUI.InsidePanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class FloorButton extends AbstractAction implements Button {
+public class CallButtonGUI extends AbstractAction {
 
+    private String direction;
     private Integer floor;
     private GUI userInterface;
-    private boolean light;
 
-    public FloorButton(Integer floor, GUI userInterface) {
-        super(floor.toString());
+    public CallButtonGUI(String direction, Integer floor, GUI userInterface) {
+        super(direction);
+        this.direction = direction;
         this.floor = floor;
-        this.light = false;
         this.userInterface = userInterface;
     }
 
@@ -26,20 +25,5 @@ public class FloorButton extends AbstractAction implements Button {
         userInterface.getInsidePanel().setFloorNb(floor.toString());
         userInterface.getElevator().updateTextInterface("L'ascenseur est à l'étage " + floor.toString());
         userInterface.getElevator().updateGraphicalInterface(floor);
-    }
-
-    @Override
-    public void activate() {
-        light = true;
-    }
-
-    @Override
-    public void deactivate() {
-        light = false;
-    }
-
-    @Override
-    public boolean getLight() {
-        return light;
     }
 }

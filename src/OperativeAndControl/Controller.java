@@ -1,5 +1,6 @@
 package OperativeAndControl;
-import Buttons.*;
+
+import OperativeAndControl.Buttons.Button;
 
 public interface Controller {
 

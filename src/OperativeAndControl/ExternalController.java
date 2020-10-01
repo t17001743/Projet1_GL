@@ -1,6 +1,6 @@
 package OperativeAndControl;
 
-import Buttons.Button;
+import OperativeAndControl.Buttons.Button;
 
 public class ExternalController implements Controller {
 
