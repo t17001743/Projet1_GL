@@ -42,10 +42,10 @@ public class GUI implements Runnable {
             textInterface = "L'ascenseur est à l'arrêt";
         }
         else if (engineState == CurrentState.UP) {
-            textInterface = "L'ascenseur est entrain de monter";
+            textInterface = "L'ascenseur est en train de monter";
         }
         else {
-            textInterface = "L'ascenseur est entrain de descendre";
+            textInterface = "L'ascenseur est en train de descendre";
         }
 
         // On récupère la position de la cabine de l'ascenseur
