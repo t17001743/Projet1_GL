@@ -1,5 +1,8 @@
 package GUI;
 
+import GUI.Panels.Elevator;
+import GUI.Panels.InsidePanel;
+import GUI.Panels.OutsidePanel;
 import OperativeAndControl.Computer;
 import OperativeAndControl.CurrentState;
 
@@ -12,9 +15,11 @@ public class GUI implements Runnable {
     private OutsidePanel outsidePanel;
     private Elevator elevator;
     private Computer computer;
+    private int lastFloorDeactivated;
 
     public GUI(int nbOfFloors, Computer computer) {
         this.computer = computer;
+        lastFloorDeactivated = -1;
 
         // On crée une instance de notre fenêtre qui représente le panneau intérieur
         insidePanel = new InsidePanel(nbOfFloors, this);
@@ -79,10 +84,20 @@ public class GUI implements Runnable {
         if(emergency) {
             textInterface += "\nETAT URGENCE ACTIF";
         }
-
+        else {
+            insidePanel.deactivateEmergencyButton();
+        }
 
         // On met à jour l'interface textuel
         elevator.updateTextInterface(textInterface);
+
+        // Si le dernier étage supprimé de la liste de priorité est différent du dernier étage désactivé
+        int lastFloorRemoved = computer.getLastFloorRemoved();
+        if(lastFloorRemoved != lastFloorDeactivated) {
+            // On éteint le bouton
+            insidePanel.deactivateFloorButton(lastFloorRemoved);
+            outsidePanel.deactivateFloorButton(lastFloorRemoved);
+        }
 
         // On attend une seconde
         try {

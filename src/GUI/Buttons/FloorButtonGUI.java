@@ -21,6 +21,7 @@ public class FloorButtonGUI extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         userInterface.getComputer().getCabin().getButtonList().get(floor).activate();
+        userInterface.getInsidePanel().activateFloorButton(floor);
 
         /*
         userInterface.getInsidePanel().setFloorNb(floor.toString());

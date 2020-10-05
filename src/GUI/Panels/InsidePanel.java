@@ -1,9 +1,12 @@
-package GUI;
+package GUI.Panels;
 
 import GUI.Buttons.EmergencyButtonGUI;
 import GUI.Buttons.FloorButtonGUI;
+import GUI.GUI;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 // Cette classe est responsable de la création de la fenêtre graphique pour le panneau à l'intérieur de l'ascenseur
 public class InsidePanel extends JFrame {
@@ -11,6 +14,8 @@ public class InsidePanel extends JFrame {
     private int nbOfFloors;
     private JLabel floorNb;
     private GUI userInterface;
+    private ArrayList<JButton> buttonList;
+    private JButton emergencyButton;
 
     // Constructeur
     // Demande le nombre d'étages
@@ -18,6 +23,7 @@ public class InsidePanel extends JFrame {
         super();
         this.nbOfFloors = nbOfFloors;
         this.userInterface = userInterface;
+        buttonList = new ArrayList<>();
 
         build();
     }
@@ -101,26 +107,47 @@ public class InsidePanel extends JFrame {
 
             // On place le bouton
             JButton button = new JButton(new FloorButtonGUI(floor, userInterface));
+            button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
             button.setFont(new Font(button.getFont().getName(), Font.BOLD, 25));
             button.setForeground(Color.WHITE);
             button.setBackground(Color.GRAY);
             buttonPanel.add(button);
+            buttonList.add(button);
         }
 
         globalPanel.add(buttonPanel, constraints);
 
         // Bouton d'arrêt d'urgence
-        JButton button = new JButton(new EmergencyButtonGUI("Arret d'urgence", nbOfFloors, userInterface));
-        button.setFont(new Font(floorNb.getFont().getName(), Font.BOLD, 25));
-        button.setForeground(Color.WHITE);
-        button.setBackground(Color.GRAY);
+        emergencyButton = new JButton(new EmergencyButtonGUI("Arret d'urgence", nbOfFloors, userInterface));
+        emergencyButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
+        emergencyButton.setFont(new Font(floorNb.getFont().getName(), Font.BOLD, 25));
+        emergencyButton.setForeground(Color.WHITE);
+        emergencyButton.setBackground(Color.GRAY);
         constraints.gridy = 3;
-        globalPanel.add(button, constraints);
+        globalPanel.add(emergencyButton, constraints);
 
         return globalPanel;
     }
 
     public void setFloorNb(String floorNb) {
         this.floorNb.setText(floorNb);
+    }
+
+    public void activateFloorButton(int floor) {
+        JButton button = buttonList.get(nbOfFloors - 1 - floor);
+        button.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
+    }
+
+    public void deactivateFloorButton(int floor) {
+        JButton button = buttonList.get(nbOfFloors - 1 - floor);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));;
+    }
+
+    public void activateEmergencyButton() {
+        emergencyButton.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
+    }
+
+    public void deactivateEmergencyButton() {
+        emergencyButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
     }
 }

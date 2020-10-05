@@ -1,15 +1,18 @@
-package GUI;
+package GUI.Panels;
 
 import GUI.Buttons.CallButtonGUI;
+import GUI.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 // Cette classe est responsable de la création de la fenêtre graphique pour les panneaux à l'extérieur de l'ascenseur
 public class OutsidePanel extends JFrame {
 
     private int nbOfFloors;
     private GUI userInterface;
+    private ArrayList<JButton> buttonList;
 
     // Constructeur
     // Demande le nombre d'étages
@@ -17,6 +20,7 @@ public class OutsidePanel extends JFrame {
         super();
         this.nbOfFloors = nbOfFloors;
         this.userInterface = userInterface;
+        buttonList = new ArrayList<>();
 
         build();
     }
@@ -74,21 +78,37 @@ public class OutsidePanel extends JFrame {
 
             // Bouton pour monter
             JButton upButton = new JButton(new CallButtonGUI("∧", floor, userInterface));
+            upButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
             upButton.setFont(new Font(upButton.getFont().getName(), Font.BOLD, upButton.getFont().getSize()));
             upButton.setForeground(Color.WHITE);
             upButton.setBackground(Color.GRAY);
             floorPanel.add(upButton);
+            buttonList.add(upButton);
 
             // Bouton pour descendre
             JButton downButton = new JButton(new CallButtonGUI(" ∨", floor, userInterface));
+            downButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
             downButton.setFont(new Font(downButton.getFont().getName(), Font.BOLD, downButton.getFont().getSize()));
             downButton.setForeground(Color.WHITE);
             downButton.setBackground(Color.GRAY);
             floorPanel.add(downButton);
+            buttonList.add(downButton);
 
             globalPanel.add(floorPanel);
         }
 
         return globalPanel;
+    }
+
+    public void activateFloorButton(int index) {
+        JButton button = buttonList.get(index);
+        button.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
+    }
+
+    public void deactivateFloorButton(int floor) {
+        JButton button = buttonList.get(2 * floor);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
+        button = buttonList.get(2 * floor + 1);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
     }
 }

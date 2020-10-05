@@ -21,5 +21,6 @@ public class EmergencyButtonGUI extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         userInterface.getComputer().getCabin().getButtonList().get(nbOfFloors).activate();
+        userInterface.getInsidePanel().activateEmergencyButton();
     }
 }

@@ -2,6 +2,7 @@ package OperativeAndControl;
 
 import OperativeAndControl.Buttons.Button;
 import OperativeAndControl.Buttons.CallButton;
+import OperativeAndControl.Buttons.EmergencyButton;
 import OperativeAndControl.Buttons.FloorButton;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Computer implements Runnable {
     private boolean emergency;
     private ArrayList<Integer> priorityList;
     private int nbFloors;
+    private int lastFloorRemoved;
 
     /**
      * Créer la cabine, le moteur et les boutons*/
@@ -28,6 +30,7 @@ public class Computer implements Runnable {
 
         priorityList = new ArrayList(); // étage(s) à desservir
         emergency = false; //aucune urgence
+        lastFloorRemoved = -1;
     }
 
     public Computer(int nbFloors){
@@ -79,14 +82,22 @@ public class Computer implements Runnable {
     }
 
     public void receivePressedButton(Button button){
-        // Si le bouton correspond à une requête pour aller vers un étage
-        if (button.getClass() == FloorButton.class) floorRequest(button.getFloor());
+        // Si le bouton est un arrêt d'urgence, on le traite forcément
+        if(button.getClass() == EmergencyButton.class) {
+            emergencyStop();
+        }
 
-        // Si le bouton correspond à un appelle de l'ascenseur
-        else if (button.getClass() == CallButton.class) callCabin(button.getFloor(), button.getDirection());
+        // Sinon ce bouton correspond à une demande provenant d'un étage ou vers un étage
+        // Si le bouton est déjà dans la liste, on ne fait rien
+        else {
+            if (!(priorityList.contains(button.getFloor()))) {
+                // Si le bouton correspond à une requête pour aller vers un étage
+                if (button.getClass() == FloorButton.class) floorRequest(button.getFloor());
 
-        // Si le bouton correspond à un arrêt d'urgence
-        else emergencyStop();
+                // Sinon, le bouton correspond à un appelle de l'ascenseur
+                else callCabin(button.getFloor(), button.getDirection());
+            }
+        }
     }
 
     // Si le bouton correspond à une requête pour aller vers un étage
@@ -582,11 +593,11 @@ public class Computer implements Runnable {
                 engine.stop();
 
                 // On supprime l'étage de la liste des étages à desservir
-                int floor = priorityList.remove(0);
+                lastFloorRemoved = priorityList.remove(0);
                 // On indique que l'étage a été desservi
-                cabin.getButtonList().get(floor).deactivate();
-                externalController.getButtonList().get(2 * floor).deactivate();
-                externalController.getButtonList().get(2 * floor + 1).deactivate();
+                cabin.getButtonList().get(lastFloorRemoved).deactivate();
+                externalController.getButtonList().get(2 * lastFloorRemoved).deactivate();
+                externalController.getButtonList().get(2 * lastFloorRemoved + 1).deactivate();
 
                 // On ouvre les portes de la cabine
                 cabin.openDoors();
@@ -663,5 +674,7 @@ public class Computer implements Runnable {
     public Engine getEngine() { return engine; }
 
     public boolean getEmergency() { return emergency; }
+
+    public int getLastFloorRemoved() { return lastFloorRemoved; }
 
 }

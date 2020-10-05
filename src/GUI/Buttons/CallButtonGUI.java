@@ -24,9 +24,11 @@ public class CallButtonGUI extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         if(direction.equals("∧")) {
             userInterface.getComputer().getExternalController().getButtonList().get(2 * floor).activate();
+            userInterface.getOutsidePanel().activateFloorButton(2 * floor);
         }
         else {
             userInterface.getComputer().getExternalController().getButtonList().get(2 * floor + 1).activate();
+            userInterface.getOutsidePanel().activateFloorButton(2 * floor + 1);
         }
 
         /*
