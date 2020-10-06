@@ -557,6 +557,9 @@ public class Computer implements Runnable {
         if(cabin.getDoors()) {
             cabin.closeDoors();
         }
+
+        // On attend une seconde en arrêt d'urgence
+        try {sleep(1000);} catch(InterruptedException e){};
     }
 
     // Permet de mettre fin à l'état d'urgence

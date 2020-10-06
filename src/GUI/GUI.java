@@ -15,11 +15,15 @@ public class GUI implements Runnable {
     private OutsidePanel outsidePanel;
     private Elevator elevator;
     private Computer computer;
+    private int nbOfFloors;
     private int lastFloorDeactivated;
+    private boolean emergencyActivated;
 
     public GUI(int nbOfFloors, Computer computer) {
         this.computer = computer;
+        this.nbOfFloors = nbOfFloors;
         lastFloorDeactivated = -1;
+        emergencyActivated = false;
 
         // On crée une instance de notre fenêtre qui représente le panneau intérieur
         insidePanel = new InsidePanel(nbOfFloors, this);
@@ -83,9 +87,20 @@ public class GUI implements Runnable {
         boolean emergency = computer.getEmergency();
         if(emergency) {
             textInterface += "\nETAT URGENCE ACTIF";
+            emergencyActivated = true;
         }
         else {
-            insidePanel.deactivateEmergencyButton();
+            // Si l'état d'urgence avait été activé
+            if(emergencyActivated) {
+                // On désactive l'état d'urgence
+                emergencyActivated = false;
+                insidePanel.deactivateEmergencyButton();
+                // On désactive tous les boutons
+                for(int floor = 0; floor < nbOfFloors; floor++) {
+                    insidePanel.deactivateFloorButton(floor);
+                    outsidePanel.deactivateFloorButton(floor);
+                }
+            }
         }
 
         // On met à jour l'interface textuel
