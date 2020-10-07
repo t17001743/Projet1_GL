@@ -1,3 +1,9 @@
+/**
+ * <h1>GL - Projet 1 (21/09/2020) M1 Informatique, Luminy</h1>
+ *
+ * @author CLERC Billy, COZZOLINO Christine, DE JAHAM Charles, TAPIN Léah, THIEL Samantha
+ */
+
 import GUI.*;
 import OperativeAndControl.Computer;
 
