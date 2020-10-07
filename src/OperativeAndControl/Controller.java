@@ -6,9 +6,14 @@ import java.util.ArrayList;
 
 public interface Controller {
 
-    // Button doit être une interface
+    /**
+     * Méthode appelé par un bouton lorsqu'il est activé
+     * Transmet le signal d'activation jusqu'à l'ordinateur
+     * */
     void sendPressedButtons(Button button);
 
-    // Renvoie la liste de ses boutons
+    /**
+     * Renvoie la liste des boutons internes liés au contrôleur
+     * */
     ArrayList<Button> getButtonList();
 }

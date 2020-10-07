@@ -14,8 +14,11 @@ public class Elevator extends JFrame {
     private JLabel graphicalElevator;
     private GUI userInterface;
 
-    // Constructeur
-    // Demande le nombre d'étages
+    /**
+     * Le constructeur de l'affichage de l'ascenseur
+     * Il lance la construction de l'affichage de l'ascenseur
+     * Il prend en entré le nombre d'étages
+     * */
     public Elevator(int nbOfFloors, GUI userInterface) {
         super();
         this.nbOfFloors = nbOfFloors;
@@ -24,7 +27,9 @@ public class Elevator extends JFrame {
         build();
     }
 
-    // Cette méthode construit la fenêtre
+    /**
+     * Cette méthode créer la fenêtre d'affichage de l'ascenseur
+     * */
     private void build() {
         // On donne un titre à la fenêtre
         setTitle("Elevator Simulator 2020");
@@ -52,6 +57,9 @@ public class Elevator extends JFrame {
     }
 
 
+    /**
+     * Cette méthode créer l'intérieur de la fenêtre d'affichage de l'ascenseur de manière graphique et textuelle
+     * */
     /* Panneau gauche ********************************
      * Ce panneau affiche l'état de l'ascenseur de   *
      * manière graphique et textuelle                *
@@ -132,10 +140,16 @@ public class Elevator extends JFrame {
         return globalPanel;
     }
 
+    /**
+     * Cette méthode met à jour l'interface textuelle de l'ascenseur
+     * */
     public void updateTextInterface(String string) {
         textInterface.setText(string);
     }
 
+    /**
+     * Cette méthode met à jour l'interface graphique de l'ascenseur
+     * */
     public void updateGraphicalInterface(Integer floor) {
         graphicalPanel.remove(graphicalElevator);
 

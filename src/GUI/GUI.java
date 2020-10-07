@@ -19,6 +19,11 @@ public class GUI implements Runnable {
     private int lastFloorDeactivated;
     private boolean emergencyActivated;
 
+    /**
+     * Le constructeur de l'interface graphique
+     * Il s'occuper de créer les trois éléments de l'interface graphique qui seront affichés à l'écran
+     * Il prend en entré l'ordinateur et le nombre d'étages du bâtiment
+     * */
     public GUI(int nbOfFloors, Computer computer) {
         this.computer = computer;
         this.nbOfFloors = nbOfFloors;
@@ -41,7 +46,9 @@ public class GUI implements Runnable {
         elevator.setVisible(true);
     }
 
-    // Le cycle d'exécution de l'interface graphique qui consiste à mettre à jour l'interface graphique
+    /**
+     * S'occupe du cycle d'exécution de l'interface graphique qui consiste à mettre à jour l'interface graphique
+     * */
     public void run() {
         String textInterface = "";
 
@@ -125,17 +132,29 @@ public class GUI implements Runnable {
         run();
     }
 
+    /**
+     * Renvoie la partie de l'interface graphique correspondant au panneau interne à la cabine
+     * */
     public InsidePanel getInsidePanel() {
         return insidePanel;
     }
 
+    /**
+     * Renvoie la partie de l'interface graphique correspondant au panneau externe à la cabine
+     * */
     public OutsidePanel getOutsidePanel() {
         return outsidePanel;
     }
 
+    /**
+     * Renvoie la partie de l'interface graphique correspondant à l'affichage de l'ascenseur
+     * */
     public Elevator getElevator() {
         return elevator;
     }
 
+    /**
+     * Renvoie l'ordinateur
+     */
     public Computer getComputer() { return computer; }
 }

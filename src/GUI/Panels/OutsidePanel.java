@@ -14,8 +14,11 @@ public class OutsidePanel extends JFrame {
     private GUI userInterface;
     private ArrayList<JButton> buttonList;
 
-    // Constructeur
-    // Demande le nombre d'étages
+    /**
+     * Le constructeur de l'affichage du panneau externe à l'ascenseur
+     * Il lance la construction de l'affichage
+     * Il prend en entré le nombre d'étages
+     * */
     public OutsidePanel(int nbOfFloors, GUI userInterface) {
         super();
         this.nbOfFloors = nbOfFloors;
@@ -25,7 +28,9 @@ public class OutsidePanel extends JFrame {
         build();
     }
 
-    // Cette méthode construit la fenêtre
+    /**
+     * Cette méthode créer la fenêtre d'affichage du panneau externe à l'ascenseur
+     * */
     private void build() {
         // On donne un titre à la fenêtre
         setTitle("Elevator's outside panels");
@@ -52,6 +57,10 @@ public class OutsidePanel extends JFrame {
         setContentPane(buildContentPane());
     }
 
+    /**
+     * Cette méthode créer l'intérieur de la fenêtre d'affichage qui contient l'ensemble des commandes externes à la cabine
+     * Ce pour chaque étage
+     * */
     /* Panneau bas droit *****************************
      * Ce panneau affiche l'ensemble des commandes   *
      * externes à la cabine, ce pour chaque étage    *
@@ -100,11 +109,18 @@ public class OutsidePanel extends JFrame {
         return globalPanel;
     }
 
+    /**
+     * Cette méthode active un bouton lié à un étage
+     * Elle reçoit un signal du bouton qui a été appuyé
+     * */
     public void activateFloorButton(int index) {
         JButton button = buttonList.get(index);
         button.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
     }
 
+    /**
+     * Cette méthode désactive un bouton lié à un étage
+     * */
     public void deactivateFloorButton(int floor) {
         JButton button = buttonList.get(2 * floor);
         button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));

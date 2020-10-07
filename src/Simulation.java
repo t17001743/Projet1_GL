@@ -6,6 +6,10 @@ public class Simulation {
     // Le nombre d'étage dans le bâtiment
     private static final int nbOfFloors = 20;
 
+    /**
+     * Le main du programme. C'est ici qu'on lance l'exécution de la simulation.
+     * Cette dernière se fait par la création de deux threads, un qui gère l'ordinateur et un qui gère l'interface graphique
+     * */
     public static void main(String[] args) {
         // On créer une instance de l'ordinateur
         Computer computer = new Computer(nbOfFloors);

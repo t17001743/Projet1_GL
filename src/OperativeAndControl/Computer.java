@@ -20,7 +20,10 @@ public class Computer implements Runnable {
     private int lastFloorRemoved;
 
     /**
-     * Créer la cabine, le moteur et les boutons*/
+     * Le constructeur de l'ordinateur
+     * Il créer la cabine, le moteur et les éléments nécessaires à son bon fonctionnement
+     * Il prend en entré le nombre d'étages du bâtiment et l'étage d'origine de l'ascenseur
+     * */
     public Computer(int nbFloors, int numFloor){
         // On créer les éléments
         cabin = new Cabin(this, nbFloors, numFloor);
@@ -33,6 +36,11 @@ public class Computer implements Runnable {
         lastFloorRemoved = -1;
     }
 
+    /**
+     * Le constructeur de l'ordinateur
+     * Il créer la cabine, le moteur et les éléments nécessaires à son bon fonctionnement
+     * Il prend en entré seulement le nombre d'étages du bâtiment
+     * */
     public Computer(int nbFloors){
         // On créer les éléments
         cabin = new Cabin(this, nbFloors);
@@ -44,7 +52,9 @@ public class Computer implements Runnable {
         emergency = false; //aucune urgence
     }
 
-    // Le cycle d'exécution de l'ordinateur
+    /**
+     * S'occupe du cycle d'éxecution de l'ordinateur
+     * */
     public void run(){
         // On commence par vérifier que la liste d'étages à desservir n'est pas vide
         if(priorityList.size() > 0) {
@@ -81,6 +91,9 @@ public class Computer implements Runnable {
         run();
     }
 
+    /**
+     * S'occupe de la gestion d'un signal lié aux boutons
+     * */
     public void receivePressedButton(Button button){
         // Si le bouton est un arrêt d'urgence, on le traite forcément
         if(button.getClass() == EmergencyButton.class) {
@@ -100,7 +113,10 @@ public class Computer implements Runnable {
         }
     }
 
-    // Si le bouton correspond à une requête pour aller vers un étage
+    /**
+     * S'occupe d'ajouter un nouvel étage correctement dans la liste des étages à désservir
+     * Dans le cas où le signal provient de l'intérieur de la cabine
+     * */
     public void floorRequest(int floor){
         // CAS 1 : Si la liste est vide, on ajoute simplement l'étage désiré
         if (priorityList.size() == 0) priorityList.add(floor);
@@ -216,7 +232,10 @@ public class Computer implements Runnable {
         }
     }
 
-    // Si le bouton correspond à un appelle de l'ascenseur
+    /**
+     * S'occupe d'ajouter un nouvel étage correctement dans la liste des étages à désservir
+     * Dans le cas où le signal provient de l'extérieur de la cabine
+     * */
     public void callCabin(int floor, String direction){
         // CAS 0 : Si la liste est vide, on ajoute simplement l'étage désiré
         if (priorityList.size() == 0) priorityList.add(floor);
@@ -547,7 +566,9 @@ public class Computer implements Runnable {
         }
     }
 
-    // Si le bouton correspond à un arrêt d'urgence
+    /**
+     * S'occupe de la gestion du lancement d'un arrêt d'urgence
+     * */
     public void emergencyStop(){
         emergency = true;
         engine.stop();
@@ -562,7 +583,9 @@ public class Computer implements Runnable {
         try {sleep(1000);} catch(InterruptedException e){};
     }
 
-    // Permet de mettre fin à l'état d'urgence
+    /**
+     * S'occupe de la remise en fonctionnement de l'ascenseur après un arrêt d'urgence
+     * */
     private void removeEmergencyStop() {
         emergency = false;
         cabin.getButtonList().get(nbFloors).deactivate();
@@ -588,6 +611,9 @@ public class Computer implements Runnable {
         }
     }
 
+    /**
+     * S'occupe de vérifier la liste d'étages à désservir pour voir si nous sommes arrivés là où nous devions aller prochainement
+     * */
     public void checkPriorityList() {
         // On regarde si on est arrivé au prochain étage à desservir si la liste n'est pas vide
         if(priorityList.size() > 0) {
@@ -619,6 +645,9 @@ public class Computer implements Runnable {
         }
     }
 
+    /**
+     * S'occupe de lancer le moteur et de lui donner un direction de force de traction
+     * */
     public void startEngine() {
         // Si la liste d'étages à desservir n'est pas vide
         if(priorityList.size() > 0) {
@@ -668,16 +697,34 @@ public class Computer implements Runnable {
         }
     }
 
+    /**
+     * Renvoi la position de la cabine
+     * */
     public double getPositionCabin(){ return cabin.getPosition(); }
 
+    /**
+     * Renvoi l'élément correspondant à la cabine de l'ascenseur
+     * */
     public Cabin getCabin() { return cabin; }
 
+    /**
+     * Renvoi l'élément correspondant aux panneaux externes à la cabine
+     * */
     public ExternalController getExternalController() { return externalController; }
 
+    /**
+     * Renvoi l'élément correspondant au moteur
+     * */
     public Engine getEngine() { return engine; }
 
+    /**
+     * Renvoi l'état d'urgence (vrai ou faux)
+     * */
     public boolean getEmergency() { return emergency; }
 
+    /**
+     * Renvoi le dernier étage sorti de la liste des étages à désservir
+     * */
     public int getLastFloorRemoved() { return lastFloorRemoved; }
 
 }

@@ -17,8 +17,11 @@ public class InsidePanel extends JFrame {
     private ArrayList<JButton> buttonList;
     private JButton emergencyButton;
 
-    // Constructeur
-    // Demande le nombre d'étages
+    /**
+     * Le constructeur de l'affichage du panneau interne à l'ascenseur
+     * Il lance la construction de l'affichage
+     * Il prend en entré le nombre d'étages
+     * */
     public InsidePanel(int nbOfFloors, GUI userInterface) {
         super();
         this.nbOfFloors = nbOfFloors;
@@ -28,7 +31,9 @@ public class InsidePanel extends JFrame {
         build();
     }
 
-    // Cette méthode construit la fenêtre
+    /**
+     * Cette méthode créer la fenêtre d'affichage du panneau interne à l'ascenseur
+     * */
     private void build() {
         // On donne un titre à la fenêtre
         setTitle("Elevator's inside panel");
@@ -55,6 +60,9 @@ public class InsidePanel extends JFrame {
         setContentPane(buildContentPane());
     }
 
+    /**
+     * Cette méthode créer l'intérieur de la fenêtre d'affichage qui contient l'ensemble des commandes internes à la cabine
+     * */
     /* Panneau haut droit ****************************
      * Ce panneau affiche l'ensemble des commandes   *
      * internes à la cabine                          *
@@ -129,24 +137,41 @@ public class InsidePanel extends JFrame {
         return globalPanel;
     }
 
+    /**
+     * Cette méthode met à jour le numéro d'étage affiché dans la cabine
+     * */
     public void setFloorNb(String floorNb) {
         this.floorNb.setText(floorNb);
     }
 
+    /**
+     * Cette méthode active un bouton lié à un étage
+     * Elle reçoit un signal du bouton qui a été appuyé
+     * */
     public void activateFloorButton(int floor) {
         JButton button = buttonList.get(nbOfFloors - 1 - floor);
         button.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
     }
 
+    /**
+     * Cette méthode désactive un bouton lié à un étage
+     * */
     public void deactivateFloorButton(int floor) {
         JButton button = buttonList.get(nbOfFloors - 1 - floor);
         button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));;
     }
 
+    /**
+     * Cette méthode active le bouton lié à l'état d'urgence
+     * Elle reçoit un signal du bouton qui a été appuyé
+     * */
     public void activateEmergencyButton() {
         emergencyButton.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
     }
 
+    /**
+     * Cette méthode désactive le bouton lié à l'état d'urgence
+     * */
     public void deactivateEmergencyButton() {
         emergencyButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
     }

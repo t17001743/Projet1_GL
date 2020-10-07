@@ -11,6 +11,10 @@ public class CallButtonGUI extends AbstractAction {
     private Integer floor;
     private GUI userInterface;
 
+    /**
+     * Le constructeur d'un bouton externe à la cabine
+     * Il prend en entré son étage ainsi que sa direction
+     * */
     public CallButtonGUI(String direction, Integer floor, GUI userInterface) {
         super(direction);
         this.direction = direction;
@@ -18,8 +22,15 @@ public class CallButtonGUI extends AbstractAction {
         this.userInterface = userInterface;
     }
 
+    /**
+     * Renvoie son étage correspondant
+     * */
     public Integer getFloor(){ return floor; }
 
+    /**
+     * Méthode executé lorsque le bouton est enclenché
+     * Il envoie un signal au panneau externe de l'interface graphique
+     * */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(direction.equals("∧")) {
