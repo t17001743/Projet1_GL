@@ -1,11 +1,11 @@
-GL - Projet 1 (21/09/2020) M1 Informatique, Luminy
+## GL - Projet 1 (21/09/2020) M1 Informatique, Luminy
 
-Groupe :
-- THIEL Samantha
-- COZZOLINO Christine
+# Groupe :
 - CLERC Billy
+- COZZOLINO Christine
 - DE JAHAM Charles
 - TAPIN Léah
+- THIEL Samantha
 
 Le système à développer est le système de contrôle-commande d'un ascenseur.
 
