@@ -30,7 +30,7 @@ L'exécutable "Projet1_GL.jar" est disponible dans le dossier "jar". Il suffit d
 
 Afin de compiler soi-même le programme sans utiliser l'exécutable jar, il suffit de se rendre dans le dossier "src" et de taper "javac Simulation.java" dans votre console.
 
-## Prodécure de lancement
+## Procédure de lancement
 
 Afin de lancer le programme précédemment compilé, il suffit de rester dans le dossier "src" et de taper "java Simulation" dans votre console.
 
