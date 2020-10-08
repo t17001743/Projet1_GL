@@ -20,7 +20,7 @@ Langage de programmation : Java
 
 ## Javadoc
 
-La javadoc est disponible dans le dossier intitulié "javadoc". Il suffit de lancer le fichier nommé "javadoc.html".
+La javadoc est disponible dans le dossier intitulié "javadoc". Il suffit de lancer le fichier nommé "index.html".
 
 ## Exécutable .jar
 
