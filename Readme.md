@@ -1,6 +1,6 @@
 # GL - Projet 1 (21/09/2020) M1 Informatique, Luminy
 
-## Groupe :
+## Équipe n°33 :
 - CLERC Billy
 - COZZOLINO Christine
 - DE JAHAM Charles
