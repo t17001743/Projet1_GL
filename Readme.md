@@ -26,6 +26,14 @@ La javadoc est disponible dans le dossier intitulié "javadoc". Il suffit de lan
 
 L'exécutable "Projet1_GL.jar" est disponible dans le dossier "jar". Il suffit de le lancer afin d'exécuter l'application.
 
+## Procédure de compilation
+
+Afin de compiler soi-même le programme sans utiliser l'exécutable jar, il suffit de se rendre dans le dossier "src" et de taper "javac Simulation.java" dans votre console.
+
+## Prodécure de lancement
+
+Afin de lancer le programme précédemment compilé, il suffit de rester dans le dossier "src" et de taper "java Simulation" dans votre console.
+
 # Annexe 1
 
 ![alt text](https://github.com/t17001743/Projet1_GL/blob/master/GUI.PNG?raw=true)
